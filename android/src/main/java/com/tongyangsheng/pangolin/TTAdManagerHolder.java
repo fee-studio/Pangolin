@@ -28,7 +28,17 @@ public class TTAdManagerHolder {
     //step1:接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
     private static void doInit(Context context,String appId,Boolean useTextureView,String appName, Boolean allowShowNotify, Boolean allowShowPageWhenScreenLock, Boolean debug, Boolean supportMultiProcess,List<Integer> directDownloadNetworkType) {
         if (!sInit) {
-            TTAdSdk.init(context, buildConfig(context,appId,useTextureView,appName,allowShowNotify,allowShowPageWhenScreenLock,debug,supportMultiProcess,directDownloadNetworkType));
+            TTAdSdk.init(context, buildConfig(context, appId, useTextureView, appName, allowShowNotify, allowShowPageWhenScreenLock, debug, supportMultiProcess, directDownloadNetworkType), new TTAdSdk.InitCallback() {
+                @Override
+                public void success() {
+                    System.out.println("success");
+                }
+
+                @Override
+                public void fail(int i, String s) {
+                    System.out.println("fail");
+                }
+            });
             sInit = true;
         }
     }
